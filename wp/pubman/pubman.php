@@ -53,8 +53,8 @@ function pubman_print_publication($publication, $addclasses){
 		$i++;
 	}
 
-	if ( $i == 1 ){
-		$result .= 'No authors (';
+	if ( $i == 0 ){
+		$result .= 'No authors';
 	}
 	if ($addclasses){
 		$result .= '</span><span class="pubclass-year">';
@@ -190,7 +190,11 @@ function pubman_publications($atts){
 	// close curl resource to free up system resources 
 	curl_close($req);
 
-	return pubman_print_publications_list($publications);
+	if ($article) {
+		return pubman_print_publication($publications, true);
+	} else {
+		return pubman_print_publications_list($publications);
+	}
 }
 
 add_shortcode('pubman', 'pubman_publications');

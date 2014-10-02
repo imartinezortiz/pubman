@@ -25,10 +25,10 @@ class PublicationsRepository {
 			$scrollingWindowSize = $page->getSize() + 1;
 			if ($page->getDir()) {
 				if ($page->isNext()) {
-					$whereClause = 'WHERE year <= ? AND (id < ? OR year < ?)';
+					$whereClause = 'WHERE (year = ? AND id < ?) OR (year < ?)';
 					$orderClause = 'ORDER BY year DESC, id DESC';
 				} else {
-					$whereClause = 'WHERE year > ? OR (id > ? AND year >= ?)';
+					$whereClause = 'WHERE (year <> ? OR id >= ? ) AND (year >= ?)';
 					$orderClause = 'ORDER BY year ASC, id ASC';
 				}
 			}
